@@ -1,0 +1,67 @@
+﻿<Window x:Class="EyeAurasWPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:EyeAurasWPF"
+        xmlns:wpf="http://materialdesigninxaml.net/winfx/xaml/themes" 
+        mc:Ignorable="d"
+        Title="MainWindow" ResizeMode="NoResize" Height="550" Width="800" Background="Gray">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Blue.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <Border Margin="25" CornerRadius="15" Background="White">
+            <StackPanel Margin="25" VerticalAlignment="Center">
+                <TextBox x:Name="Path" wpf:HintAssist.HintOpacity="1" Height="40" wpf:HintAssist.Hint="Путь к запуску игры" wpf:HintAssist.IsFloating="True" Margin="15" Width="400"></TextBox>
+                <Grid Margin="5" Height="40" Width="400">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Логин\Пароль" HorizontalAlignment="Right" VerticalAlignment="Center"></TextBlock>
+                    <ToggleButton x:Name="Login_Arg_toogle" Grid.Column="1" Style="{StaticResource     MaterialDesignSwitchLightToggleButton}" ></ToggleButton>
+                    <TextBlock  Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Left" Text="Аргументы"></TextBlock>
+                </Grid>
+                <StackPanel Orientation="Horizontal" Margin="5" Height="40" Width="400" >
+                    <StackPanel.Style>
+                        <Style TargetType="StackPanel">
+                            <Setter Property="Visibility" Value="Visible"></Setter>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ElementName=Login_Arg_toogle,Path=IsChecked}" Value="true">
+                                    <Setter Property="Visibility" Value="Collapsed"></Setter>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </StackPanel.Style>
+                    <TextBox wpf:HintAssist.HintOpacity="1" x:Name="Login" wpf:HintAssist.Hint="Логин" wpf:HintAssist.IsFloating="True" Margin="0,0,15,0" Width="185"></TextBox>
+                    <TextBox wpf:HintAssist.HintOpacity="1" x:Name="Password" wpf:HintAssist.Hint="Пароль" wpf:HintAssist.IsFloating="True" Margin="15,0,0,0" Width="185"></TextBox>
+                </StackPanel>
+                <TextBox wpf:HintAssist.HintOpacity="1" x:Name="Arg" wpf:HintAssist.Hint="Аргументы" Height="40" wpf:HintAssist.IsFloating="True" Margin="5" Width="400">
+                    <TextBox.Style>
+                        <Style TargetType="TextBox" BasedOn="{StaticResource  MaterialDesignFloatingHintTextBox}">
+                            <Setter Property="Visibility" Value="Collapsed"></Setter>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ElementName=Login_Arg_toogle,Path=IsChecked}" Value="true">
+                                    <Setter Property="Visibility" Value="Visible"></Setter>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBox.Style>
+                </TextBox>
+
+                <CheckBox Content="Телеграм оповещение" x:Name="telegram" Margin="5" Width="400"></CheckBox>
+                <TextBox wpf:HintAssist.HintOpacity="1"  x:Name="Chatid" Height="40" wpf:HintAssist.Hint="Chatid" wpf:HintAssist.IsFloating="True" Margin="5" Width="400"></TextBox>
+                <TextBox wpf:HintAssist.HintOpacity="1"  x:Name="Token" Height="40" wpf:HintAssist.Hint="Token" wpf:HintAssist.IsFloating="True" Margin="5" Width="400"></TextBox>
+                <Button Width="150" Margin="15" Content="Сохранить" Click="Button_Click"></Button>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>
