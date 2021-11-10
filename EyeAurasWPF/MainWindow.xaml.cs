@@ -57,14 +57,16 @@ namespace EyeAurasWPF
                 {
 
                 
-                var path_json = Environment.ExpandEnvironmentVariables("%appdata%/EyeAuras/EyeSquad/");
+                    var path_json = Environment.ExpandEnvironmentVariables("%appdata%/EyeAuras/EyeSquad/");
                     if (!Directory.Exists(path_json)) Directory.CreateDirectory(path_json);
+                    path_json = $"{path_json}//id.config";
+                    if (File.Exists(path_json)) File.Delete(path_json);
 
-                    using (FileStream fs = new FileStream($"{path_json}//id.config", FileMode.OpenOrCreate))
+                    using (FileStream fs = new FileStream($"{path_json}", FileMode.OpenOrCreate))
                 {
                     
                     await JsonSerializer.SerializeAsync<JsonCreate>(fs, this);
-                    Console.WriteLine("Data has been saved to file");
+                    
                 }
                 }
                 catch(Exception ex)
