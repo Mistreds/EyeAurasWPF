@@ -19,7 +19,8 @@
     <Grid>
         <Border Margin="25" CornerRadius="15" Background="White">
             <StackPanel Margin="25" VerticalAlignment="Center">
-                <TextBox x:Name="Path" wpf:HintAssist.HintOpacity="1" Height="40" wpf:HintAssist.Hint="Путь к запуску игры" wpf:HintAssist.IsFloating="True" Margin="15" Width="400"></TextBox>
+                <TextBox x:Name="Host" wpf:HintAssist.HintOpacity="1" Height="40" wpf:HintAssist.Hint="Host" wpf:HintAssist.IsFloating="True" Margin="15" Width="400"></TextBox>
+                <TextBox x:Name="Path" wpf:HintAssist.HintOpacity="1" Height="40" wpf:HintAssist.Hint="Путь к запуску игры" wpf:HintAssist.IsFloating="True" Margin="5" Width="400"></TextBox>
                 <Grid Margin="5" Height="40" Width="400">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition></ColumnDefinition>
@@ -58,8 +59,30 @@
                 </TextBox>
 
                 <CheckBox Content="Телеграм оповещение" x:Name="telegram" Margin="5" Width="400"></CheckBox>
-                <TextBox wpf:HintAssist.HintOpacity="1"  x:Name="Chatid" Height="40" wpf:HintAssist.Hint="Chatid" wpf:HintAssist.IsFloating="True" Margin="5" Width="400"></TextBox>
-                <TextBox wpf:HintAssist.HintOpacity="1"  x:Name="Token" Height="40" wpf:HintAssist.Hint="Token" wpf:HintAssist.IsFloating="True" Margin="5" Width="400"></TextBox>
+                <TextBox wpf:HintAssist.HintOpacity="1"  x:Name="Chatid" Height="40" wpf:HintAssist.Hint="Chatid" wpf:HintAssist.IsFloating="True" Margin="5" Width="400">
+                    <TextBox.Style>
+                        <Style TargetType="TextBox" BasedOn="{StaticResource  MaterialDesignFloatingHintTextBox}">
+                            <Setter Property="Visibility" Value="Collapsed"></Setter>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ElementName=telegram,Path=IsChecked}" Value="true">
+                                    <Setter Property="Visibility" Value="Visible"></Setter>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBox.Style>
+                </TextBox>
+                <TextBox wpf:HintAssist.HintOpacity="1"  x:Name="Token" Height="40" wpf:HintAssist.Hint="Token" wpf:HintAssist.IsFloating="True" Margin="5" Width="400">
+                    <TextBox.Style>
+                        <Style TargetType="TextBox" BasedOn="{StaticResource  MaterialDesignFloatingHintTextBox}">
+                            <Setter Property="Visibility" Value="Collapsed"></Setter>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ElementName=telegram,Path=IsChecked}" Value="true">
+                                    <Setter Property="Visibility" Value="Visible"></Setter>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBox.Style>
+                </TextBox>
                 <Button Width="150" Margin="15" Content="Сохранить" Click="Button_Click"></Button>
             </StackPanel>
         </Border>
