@@ -62,7 +62,7 @@
                 <TextBox wpf:HintAssist.HintOpacity="1"  x:Name="Chatid" Height="40" wpf:HintAssist.Hint="Chatid" wpf:HintAssist.IsFloating="True" Margin="5" Width="400">
                     <TextBox.Style>
                         <Style TargetType="TextBox" BasedOn="{StaticResource  MaterialDesignFloatingHintTextBox}">
-                            <Setter Property="Visibility" Value="Collapsed"></Setter>
+                            <Setter Property="Visibility" Value="Hidden"></Setter>
                             <Style.Triggers>
                                 <DataTrigger Binding="{Binding ElementName=telegram,Path=IsChecked}" Value="true">
                                     <Setter Property="Visibility" Value="Visible"></Setter>
@@ -74,7 +74,7 @@
                 <TextBox wpf:HintAssist.HintOpacity="1"  x:Name="Token" Height="40" wpf:HintAssist.Hint="Token" wpf:HintAssist.IsFloating="True" Margin="5" Width="400">
                     <TextBox.Style>
                         <Style TargetType="TextBox" BasedOn="{StaticResource  MaterialDesignFloatingHintTextBox}">
-                            <Setter Property="Visibility" Value="Collapsed"></Setter>
+                            <Setter Property="Visibility" Value="Hidden"></Setter>
                             <Style.Triggers>
                                 <DataTrigger Binding="{Binding ElementName=telegram,Path=IsChecked}" Value="true">
                                     <Setter Property="Visibility" Value="Visible"></Setter>
