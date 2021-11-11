@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:EyeAurasWPF"
         xmlns:wpf="http://materialdesigninxaml.net/winfx/xaml/themes" 
         mc:Ignorable="d"
+        AllowsTransparency="True" WindowStyle="None"
         Title="MainWindow" ResizeMode="NoResize" Height="550" Width="800" Background="Gray">
     <Window.Resources>
         <ResourceDictionary>

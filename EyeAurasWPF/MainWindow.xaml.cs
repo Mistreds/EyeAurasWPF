@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -84,18 +85,64 @@ namespace EyeAurasWPF
             }
         }
         private string id;
-        public MainWindow(string id = "id.config")
+        public MainWindow(string id)
         {
             this.id = id;
-            if (id != "id.config")
-            {
-                this.id = $"eyesquad-{id}.config";
-            }
+            
+
+            InitializeComponent();
+        }
+        public MainWindow()
+        {
+
+            id = "id.config";
+            
 
             InitializeComponent();
 
+            WebRequest request = WebRequest.Create("https://raw.githubusercontent.com/Mistreds/EyeAurasWPF/master/version");
+            WebResponse response = request.GetResponse();
+            string vers = "";
+            using (Stream stream = response.GetResponseStream())
+            {
+                using (StreamReader reader = new StreamReader(stream))
+                {
+                    string line = "";
+                    while ((line = reader.ReadLine()) != null)
+                    {
+                        Console.WriteLine(line);
+                        vers = line;
+                    }
+                }
+            }
+            var path_json = Environment.ExpandEnvironmentVariables("%appdata%/EyeAuras/");
+            if (!Directory.Exists(path_json)) Directory.CreateDirectory(path_json);
+            bool is_new = false;
+            using (FileStream fstream = new FileStream($"{path_json}\\version", FileMode.OpenOrCreate))
+            {
+                byte[] array = new byte[fstream.Length];
+                // считываем данные
+                fstream.Read(array, 0, array.Length);
+                // декодируем байты в строку
+                string vers_from_file = System.Text.Encoding.Default.GetString(array);
+                if(vers_from_file!=vers)
+                {
+                    is_new = true;
+                }
+                
+            }
+            if (is_new)
+            {
+                using (FileStream fstream = new FileStream($"{path_json}\\version", FileMode.Create))
+                {
+                    // преобразуем строку в байты
+                    byte[] array = System.Text.Encoding.Default.GetBytes(vers);
+                    // запись массива байтов в файл
+                    fstream.Write(array, 0, array.Length);
+                    Console.WriteLine("Текст записан в файл");
+                }
+            }
         }
-
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             JsonCreate json = new JsonCreate((bool)Login_Arg_toogle.IsChecked, Path.Text, Arg.Text, Login.Text, Password.Text, (bool)telegram.IsChecked, Token.Text, Chatid.Text, Host.Text, id);
