@@ -87,8 +87,9 @@ namespace EyeAurasWPF
         private string id;
         public MainWindow(string id)
         {
-            this.id = id;
-            
+            this.id = $"eyesquad-{id}.config";
+
+
 
             InitializeComponent();
         }

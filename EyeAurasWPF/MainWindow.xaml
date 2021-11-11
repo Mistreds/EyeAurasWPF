@@ -16,6 +16,15 @@
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Blue.xaml" />
             </ResourceDictionary.MergedDictionaries>
+            <DrawingImage x:Key="pngtree_cancel_vector_icon_png_image_1824212__1_DrawingImage">
+                <DrawingImage.Drawing>
+                    <DrawingGroup ClipGeometry="M0,0 V640 H640 V0 H0 Z">
+                        <DrawingGroup Opacity="1" Transform="0.1,0,0,-0.1,0,640">
+                            <GeometryDrawing Brush="White" Geometry="F1 M640,640z M0,0z M1393,5585C1313,5561 1265,5521 1063,5318 826,5080 809,5053 802,4909 797,4817 812,4750 853,4680 864,4661 1197,4320 1594,3923L2315,3200 1594,2477C1197,2080 864,1739 853,1720 812,1650 797,1583 802,1490 809,1346 829,1315 1077,1068 1321,826 1347,809 1491,802 1583,797 1650,812 1720,853 1739,864 2080,1197 2478,1594L3200,2315 3923,1594C4320,1197 4661,864 4680,853 4750,812 4817,797 4910,802 5054,809 5085,829 5332,1077 5574,1321 5591,1347 5598,1491 5603,1583 5588,1650 5547,1720 5536,1739 5203,2080 4806,2478L4085,3200 4806,3923C5203,4320 5536,4661 5547,4680 5588,4750 5603,4817 5598,4909 5591,5053 5574,5079 5332,5323 5085,5571 5054,5591 4910,5598 4817,5603 4750,5588 4680,5547 4661,5536 4320,5203 3922,4806L3200,4085 2482,4801C2088,5195 1751,5527 1733,5539 1650,5596 1493,5617 1393,5585z M1625,5418C1651,5405 1931,5133 2415,4649 3121,3944 3167,3900 3200,3900 3233,3900 3279,3944 3985,4649 4519,5182 4748,5405 4780,5421 4832,5447 4914,5451 4975,5431 5030,5412 5393,5056 5423,4990 5452,4927 5451,4839 5421,4780 5405,4748 5179,4516 4649,3985 3944,3279 3900,3233 3900,3200 3900,3167 3944,3121 4649,2415 5179,1884 5405,1652 5421,1620 5451,1561 5452,1473 5423,1410 5393,1344 5030,988 4975,969 4914,949 4832,953 4780,979 4748,995 4519,1218 3985,1751 3279,2456 3233,2500 3200,2500 3167,2500 3121,2456 2415,1751 1884,1221 1652,995 1620,979 1561,949 1473,948 1410,977 1344,1007 988,1370 969,1425 949,1486 953,1568 979,1620 995,1652 1218,1881 1751,2415 2456,3121 2500,3167 2500,3200 2500,3233 2456,3279 1751,3985 1218,4519 995,4748 979,4780 965,4810 957,4844 956,4880 956,4983 966,4999 1174,5208 1279,5315 1377,5408 1392,5416 1463,5453 1552,5454 1625,5418z" />
+                        </DrawingGroup>
+                    </DrawingGroup>
+                </DrawingImage.Drawing>
+            </DrawingImage>
             <Style TargetType="Button" x:Key="Close">
                 <Setter Property="Background" Value="Transparent"></Setter>
                 <Setter Property="Template">
@@ -26,7 +35,7 @@
                             </Border>
                         </ControlTemplate>
                     </Setter.Value>
-                    
+
                 </Setter>
                 <Style.Triggers>
                     <Trigger Property="IsMouseOver"  Value="True">
@@ -54,12 +63,13 @@
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" Foreground="White" Text="EYE SQUAD - CONFIGURATOR"></TextBlock>
                 <Button x:Name="ButtonClose" Click="ButtonClose_Click" Style="{StaticResource Close}" Height="40" Width="50" Grid.Column="2">
-                    <Image Source="/Image/Close.png" />
+
+                    <Image Source="{StaticResource pngtree_cancel_vector_icon_png_image_1824212__1_DrawingImage}" Height="36" Width="40" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="3,0,0,0"></Image>
 
                 </Button>
             </Grid>
         </Border>
-       
+
         <Border Grid.Row="1" Background="White">
             <StackPanel Margin="25" VerticalAlignment="Center">
                 <TextBox x:Name="Host" wpf:HintAssist.HintOpacity="1" Height="40" wpf:HintAssist.Hint="Host" wpf:HintAssist.IsFloating="True" Margin="15" Width="400"></TextBox>
@@ -128,7 +138,7 @@
                 </TextBox>
                 <Button Width="150" Margin="15" Content="Сохранить" Click="Button_Click"></Button>
             </StackPanel>
-        
+
         </Border>
     </Grid>
 </Window>
