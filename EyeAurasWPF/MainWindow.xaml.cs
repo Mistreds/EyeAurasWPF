@@ -162,5 +162,15 @@ namespace EyeAurasWPF
             _ = json.CreateJson();
             Close();
         }
+
+        private void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            DragMove();
+        }
+
+        private void ButtonClose_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
     }
 }
