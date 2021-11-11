@@ -33,11 +33,11 @@ namespace EyeAurasWPF
             public bool Telegram { get; private set; }
             public string token { get; private set; }
             public string chatid { get; private set; }
-            
-            public JsonCreate(bool logpass, string path, string arg, string login, string password, bool telegram, string token, string chatid,string host)
+            private string id;
+            public JsonCreate(bool logpass, string path, string arg, string login, string password, bool telegram, string token, string chatid, string host, string id)
             {
                 this.logpass = !logpass;
-                if(logpass==true)
+                if (logpass == true)
                 {
                     this.arg = arg;
                 }
@@ -47,12 +47,13 @@ namespace EyeAurasWPF
                     Password = password;
                 }
                 this.path = path;
-                
-                
+
+
                 Telegram = telegram;
                 this.token = token;
                 this.chatid = chatid;
                 this.host = host;
+                this.id = id;
             }
             public async Task CreateJson()
             {
@@ -66,31 +67,39 @@ namespace EyeAurasWPF
 
                     var path_json = Environment.ExpandEnvironmentVariables("%appdata%/EyeAuras/EyeSquad/");
                     if (!Directory.Exists(path_json)) Directory.CreateDirectory(path_json);
-                    path_json = $"{path_json}//id.config";
+                    path_json = $"{path_json}//{id}";
                     if (File.Exists(path_json)) File.Delete(path_json);
 
                     using (FileStream fs = new FileStream($"{path_json}", FileMode.OpenOrCreate))
-                {
-                    
-                    await JsonSerializer.SerializeAsync<JsonCreate>(fs, this, options);
-                    
+                    {
+
+                        await JsonSerializer.SerializeAsync<JsonCreate>(fs, this, options);
+
+                    }
                 }
-                }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     Console.WriteLine(ex.Message);
                 }
             }
         }
-        public MainWindow()
+        private string id;
+        public MainWindow(string id = "id.config")
         {
+            this.id = id;
+            if (id != "id.config")
+            {
+                this.id = $"eyesquad-{id}.config";
+            }
+
             InitializeComponent();
+
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            JsonCreate json = new JsonCreate((bool)Login_Arg_toogle.IsChecked, Path.Text, Arg.Text, Login.Text, Password.Text, (bool)telegram.IsChecked, Token.Text,Chatid.Text, Host.Text) ;
-            _=json.CreateJson();
+            JsonCreate json = new JsonCreate((bool)Login_Arg_toogle.IsChecked, Path.Text, Arg.Text, Login.Text, Password.Text, (bool)telegram.IsChecked, Token.Text, Chatid.Text, Host.Text, id);
+            _ = json.CreateJson();
             Close();
         }
     }
