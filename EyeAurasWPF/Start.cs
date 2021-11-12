@@ -8,11 +8,11 @@ namespace EyeAurasWPF
 {
     public class Start
     {
-        public void create(string id)
+        public void create(string id,string path)
         {
             App.Current.Dispatcher.Invoke((Action)delegate
             {
-                MainWindow window = new MainWindow(id);
+                MainWindow window = new MainWindow(id,path);
                 window.Show();
             });
         }

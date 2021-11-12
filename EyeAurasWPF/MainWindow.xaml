@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         AllowsTransparency="True" WindowStyle="None" 
         Background="Transparent"
-        Title="MainWindow" ResizeMode="NoResize" Height="550" Width="800">
+        Title="MainWindow" ResizeMode="NoResize" Height="550" Width="800" WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -64,7 +64,7 @@
                 <TextBlock Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" Foreground="White" Text="EYE SQUAD - CONFIGURATOR"></TextBlock>
                 <Button x:Name="ButtonClose" Click="ButtonClose_Click" Style="{StaticResource Close}" Height="40" Width="50" Grid.Column="2">
 
-                    <Image Source="{StaticResource pngtree_cancel_vector_icon_png_image_1824212__1_DrawingImage}" Height="36" Width="40" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="3,0,0,0"></Image>
+                    <Image Source="{StaticResource pngtree_cancel_vector_icon_png_image_1824212__1_DrawingImage}" Height="36" Width="40" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="2,6,0,0"></Image>
 
                 </Button>
             </Grid>

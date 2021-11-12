@@ -7,7 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="eye_script.cs" />
+    <Compile Remove="eye_update.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Image\Close.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="eye_script.cs" />
+    <None Include="eye_update.cs" />
   </ItemGroup>
 
   <ItemGroup>
