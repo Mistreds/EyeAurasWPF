@@ -35,6 +35,7 @@ namespace EyeAurasWPF
             public string token { get; private set; }
             public string chatid { get; private set; }
             private string id;
+            public string error { get;private set; }
             public JsonCreate(bool logpass, string path, string arg, string login, string password, bool telegram, string token, string chatid, string host, string id)
             {
                 this.logpass = !logpass;
@@ -58,6 +59,7 @@ namespace EyeAurasWPF
             }
             public async Task CreateJson()
             {
+                
                 try
                 {
                     var options = new JsonSerializerOptions
@@ -70,13 +72,14 @@ namespace EyeAurasWPF
                     {
 
                         await JsonSerializer.SerializeAsync<JsonCreate>(fs, this, options);
-
+                        
                     }
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine(ex.Message);
+                    error = ex.Message;
                 }
+               
             }
         }
         private string id;
@@ -102,8 +105,23 @@ namespace EyeAurasWPF
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             JsonCreate json = new JsonCreate((bool)Login_Arg_toogle.IsChecked, Path.Text, Arg.Text, Login.Text, Password.Text, (bool)telegram.IsChecked, Token.Text, Chatid.Text, Host.Text, id);
-            _ = json.CreateJson();
-            Close();
+           
+               _= json.CreateJson();
+            var err = json.error;
+            if(string.IsNullOrEmpty(err))
+            {
+                Close();
+            }
+            else
+            {
+                this.lblCursorPosition.Text = err;
+            }
+
+           
+         
+            
+
+            //Close();
         }
 
         private void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)

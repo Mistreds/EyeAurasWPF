@@ -10,6 +10,7 @@ namespace EyeAurasWPF
     {
         public void create(string id,string path)
         {
+
             App.Current.Dispatcher.Invoke((Action)delegate
             {
                 MainWindow window = new MainWindow(id,path);

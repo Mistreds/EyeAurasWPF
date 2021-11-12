@@ -53,6 +53,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="40"></RowDefinition>
             <RowDefinition></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
         </Grid.RowDefinitions>
         <Border MouseLeftButtonDown="Border_MouseLeftButtonDown" Grid.Row="0" Background="#ed5700" CornerRadius="15,15,0,0">
             <Grid>
@@ -140,5 +141,11 @@
             </StackPanel>
 
         </Border>
+        <StatusBar  Grid.Row="2" Background="White">
+            <StatusBarItem>
+                <TextBlock Foreground="Black" Name="lblCursorPosition" />
+            </StatusBarItem>
+        </StatusBar>
     </Grid>
+    
 </Window>
