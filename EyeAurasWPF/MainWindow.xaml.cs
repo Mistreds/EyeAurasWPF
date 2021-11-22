@@ -1,10 +1,12 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -35,6 +37,7 @@ namespace EyeAurasWPF
             public string token { get; private set; }
             public string chatid { get; private set; }
             private string id;
+            [JsonIgnore]
             public string error { get;private set; }
             public JsonCreate(bool logpass, string path, string arg, string login, string password, bool telegram, string token, string chatid, string host, string id)
             {
@@ -67,7 +70,7 @@ namespace EyeAurasWPF
                         WriteIndented = true
                     };
 
-
+                    if (File.Exists(id)) File.Delete(id);
                     using (FileStream fs = new FileStream(id, FileMode.OpenOrCreate))
                     {
 
@@ -99,27 +102,35 @@ namespace EyeAurasWPF
 
             InitializeComponent();
 
-            
-    
+
+
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            JsonCreate json = new JsonCreate((bool)Login_Arg_toogle.IsChecked, Path.Text, Arg.Text, Login.Text, Password.Text, (bool)telegram.IsChecked, Token.Text, Chatid.Text, Host.Text, id);
-           
-               _= json.CreateJson();
-            var err = json.error;
-            if(string.IsNullOrEmpty(err))
+            if (!string.IsNullOrEmpty(Path.Text))
             {
-                Close();
+
+
+                JsonCreate json = new JsonCreate((bool)Login_Arg_toogle.IsChecked, Path.Text, Arg.Text, Login.Text, Password.Text, (bool)telegram.IsChecked, Token.Text, Chatid.Text, Host.Text, id);
+
+                _ = json.CreateJson();
+                var err = json.error;
+                if (string.IsNullOrEmpty(err))
+                {
+                    Close();
+                }
+                else
+                {
+                    this.lblCursorPosition.Text = err;
+                }
+
             }
             else
             {
-                this.lblCursorPosition.Text = err;
+                this.lblCursorPosition.Text = "Ошибка, не выбран путь к запуску игры";
             }
 
-           
-         
-            
+
 
             //Close();
         }
@@ -132,6 +143,15 @@ namespace EyeAurasWPF
         private void ButtonClose_Click(object sender, RoutedEventArgs e)
         {
             Close();
+        }
+
+        private void path_button_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog() { Filter = "EXE файлы(*.exe)|*.exe" };
+            if (openFileDialog.ShowDialog() == true)
+            {
+                this.Path.Text = openFileDialog.FileName;
+            }
         }
     }
 }

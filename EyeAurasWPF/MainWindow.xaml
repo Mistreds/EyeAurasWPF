@@ -8,13 +8,14 @@
         mc:Ignorable="d"
         AllowsTransparency="True" WindowStyle="None" 
         Background="Transparent"
+        Topmost="True"
         Title="MainWindow" ResizeMode="NoResize" Height="550" Width="800" WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Blue.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepOrange.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <DrawingImage x:Key="pngtree_cancel_vector_icon_png_image_1824212__1_DrawingImage">
                 <DrawingImage.Drawing>
@@ -47,9 +48,16 @@
                     </Trigger>
                 </Style.Triggers>
             </Style>
+            <Style TargetType="TextBox" x:Key="thisTextBox" BasedOn="{StaticResource MaterialDesignFloatingHintTextBox}">
+                <Setter Property="FontWeight" Value="Bold"></Setter>
+            </Style>
+            <Style TargetType="TextBlock" >
+                <Setter Property="FontWeight" Value="Bold"></Setter>
+            </Style>
         </ResourceDictionary>
     </Window.Resources>
-    <Grid>
+    
+    <Grid >
         <Grid.RowDefinitions>
             <RowDefinition Height="40"></RowDefinition>
             <RowDefinition></RowDefinition>
@@ -62,7 +70,7 @@
                     <ColumnDefinition></ColumnDefinition>
                     <ColumnDefinition Width="50"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" Foreground="White" Text="EYE SQUAD - CONFIGURATOR"></TextBlock>
+                <TextBlock Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" Foreground="White" Text="EyeSquad - Configurator"></TextBlock>
                 <Button x:Name="ButtonClose" Click="ButtonClose_Click" Style="{StaticResource Close}" Height="40" Width="50" Grid.Column="2">
 
                     <Image Source="{StaticResource pngtree_cancel_vector_icon_png_image_1824212__1_DrawingImage}" Height="36" Width="40" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="2,6,0,0"></Image>
@@ -73,9 +81,13 @@
 
         <Border Grid.Row="1" Background="White">
             <StackPanel Margin="25" VerticalAlignment="Center">
-                <TextBox x:Name="Host" wpf:HintAssist.HintOpacity="1" Height="40" wpf:HintAssist.Hint="Host" wpf:HintAssist.IsFloating="True" Margin="15" Width="400"></TextBox>
-                <TextBox x:Name="Path" wpf:HintAssist.HintOpacity="1" Height="40" wpf:HintAssist.Hint="Путь к запуску игры" wpf:HintAssist.IsFloating="True" Margin="5" Width="400"></TextBox>
-                <Grid Margin="5" Height="40" Width="400">
+                <TextBox ToolTip="Необходимо прописать Host" Style="{StaticResource thisTextBox}" x:Name="Host" wpf:HintAssist.HintOpacity="1" Height="40" wpf:HintAssist.Hint="Host" wpf:HintAssist.IsFloating="True" Margin="15" Width="400"></TextBox>
+                <StackPanel Width="400" Orientation="Horizontal"  MaxHeight="300" Margin="5" >
+                    <TextBox Width="200" TextWrapping="Wrap" IsReadOnly="True" Style="{StaticResource thisTextBox}"  x:Name="Path" wpf:HintAssist.HintOpacity="1" MinHeight="40"  wpf:HintAssist.Hint="Путь к запуску игры" wpf:HintAssist.IsFloating="True" ></TextBox>
+                    <Button Width="180" Margin="20,0,0,0" x:Name="path_button" Content="Выбрать путь" Click="path_button_Click"></Button>
+                </StackPanel>
+                
+                <Grid ToolTip="Выбор между вводом логина\пароля или аргументов" Margin="5" Height="40" Width="400">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition></ColumnDefinition>
                         <ColumnDefinition></ColumnDefinition>
@@ -96,10 +108,10 @@
                             </Style.Triggers>
                         </Style>
                     </StackPanel.Style>
-                    <TextBox wpf:HintAssist.HintOpacity="1" x:Name="Login" wpf:HintAssist.Hint="Логин" wpf:HintAssist.IsFloating="True" Margin="0,0,15,0" Width="185"></TextBox>
-                    <TextBox wpf:HintAssist.HintOpacity="1" x:Name="Password" wpf:HintAssist.Hint="Пароль" wpf:HintAssist.IsFloating="True" Margin="15,0,0,0" Width="185"></TextBox>
+                    <TextBox ToolTip="Ввод логина" Style="{StaticResource thisTextBox}"  wpf:HintAssist.HintOpacity="1" x:Name="Login" wpf:HintAssist.Hint="Логин" wpf:HintAssist.IsFloating="True" Margin="0,0,15,0" Width="185"></TextBox>
+                    <TextBox ToolTip="Ввод пароля" Style="{StaticResource thisTextBox}"  wpf:HintAssist.HintOpacity="1" x:Name="Password" wpf:HintAssist.Hint="Пароль" wpf:HintAssist.IsFloating="True" Margin="15,0,0,0" Width="185"></TextBox>
                 </StackPanel>
-                <TextBox wpf:HintAssist.HintOpacity="1" x:Name="Arg" wpf:HintAssist.Hint="Аргументы" Height="40" wpf:HintAssist.IsFloating="True" Margin="5" Width="400">
+                <TextBox ToolTip="Ввод аргументов" wpf:HintAssist.HintOpacity="1" x:Name="Arg" wpf:HintAssist.Hint="Аргументы" Height="40" wpf:HintAssist.IsFloating="True" Margin="5" Width="400">
                     <TextBox.Style>
                         <Style TargetType="TextBox" BasedOn="{StaticResource  MaterialDesignFloatingHintTextBox}">
                             <Setter Property="Visibility" Value="Collapsed"></Setter>
@@ -112,22 +124,22 @@
                     </TextBox.Style>
                 </TextBox>
 
-                <CheckBox Content="Телеграм оповещение" x:Name="telegram" Margin="5" Width="400"></CheckBox>
-                <TextBox wpf:HintAssist.HintOpacity="1"  x:Name="Chatid" Height="40" wpf:HintAssist.Hint="Chatid" wpf:HintAssist.IsFloating="True" Margin="5" Width="400">
+                <CheckBox ToolTip="Включить или выключить телеграм оповещение" Content="Телеграм оповещение" FontWeight="Bold" x:Name="telegram" Margin="5" Width="400"></CheckBox>
+                <TextBox  wpf:HintAssist.HintOpacity="1" ToolTip="Id чата в телеграм" x:Name="Chatid" Height="40" wpf:HintAssist.Hint="Chatid" wpf:HintAssist.IsFloating="True" Margin="5" Width="400">
                     <TextBox.Style>
-                        <Style TargetType="TextBox" BasedOn="{StaticResource  MaterialDesignFloatingHintTextBox}">
+                        <Style TargetType="TextBox" BasedOn="{StaticResource thisTextBox}" >
                             <Setter Property="Visibility" Value="Hidden"></Setter>
                             <Style.Triggers>
-                                <DataTrigger Binding="{Binding ElementName=telegram,Path=IsChecked}" Value="true">
+                                <DataTrigger Binding="{Binding ElementName=telegram,Path=IsChecked}" Value="True">
                                     <Setter Property="Visibility" Value="Visible"></Setter>
                                 </DataTrigger>
                             </Style.Triggers>
                         </Style>
                     </TextBox.Style>
                 </TextBox>
-                <TextBox wpf:HintAssist.HintOpacity="1"  x:Name="Token" Height="40" wpf:HintAssist.Hint="Token" wpf:HintAssist.IsFloating="True" Margin="5" Width="400">
+                <TextBox wpf:HintAssist.HintOpacity="1" ToolTip="Токен телеграм" x:Name="Token" Height="40" wpf:HintAssist.Hint="Token" wpf:HintAssist.IsFloating="True" Margin="5" Width="400">
                     <TextBox.Style>
-                        <Style TargetType="TextBox" BasedOn="{StaticResource  MaterialDesignFloatingHintTextBox}">
+                        <Style TargetType="TextBox" BasedOn="{StaticResource thisTextBox}">
                             <Setter Property="Visibility" Value="Hidden"></Setter>
                             <Style.Triggers>
                                 <DataTrigger Binding="{Binding ElementName=telegram,Path=IsChecked}" Value="true">
@@ -147,5 +159,5 @@
             </StatusBarItem>
         </StatusBar>
     </Grid>
-    
+   
 </Window>
